@@ -1,17 +1,22 @@
+---
+layout: default
+---
+
 # Day 2 — The RAG Solution
 
-## Demo
-Search: "device for presentations"
+## 🔥 Demo
 
-Keyword search fails → why?
+"device for presentations"
+
+Why does keyword search fail?
 
 ---
 
-## Embeddings
+## 🧠 Embeddings
+
 ```mermaid
 graph TD
     A["wireless mouse"] --> B["vector"]
     C["bluetooth pointer"] --> D["vector"]
-
     B --> E["close"]
     D --> E
