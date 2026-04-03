@@ -1,0 +1,7 @@
+[book]
+title = "Search to RAG Workshop"
+authors = ["Neha Bajaj"]
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "ayu"
