@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>2. How Search Works - Search to RAG Workshop</title>
+        <title>The Inverted Index - Search to RAG Workshop</title>
 
 
         <!-- Custom HTML head -->
@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-d92085b1.js";
+            window.path_to_searchindex_js = "../searchindex-e8e08c15.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-aee9a9dd.js"></script>
+        <script src="../toc-ff2b06db.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -174,24 +174,57 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="2-how-search-works"><a class="header" href="#2-how-search-works">2. How Search Works</a></h1>
-<p>At a high level, search follows a pipeline:</p>
-<pre><code class="language-mermaid">graph LR
-    A[Query] --&gt; B[Tokenization]
-    B --&gt; C[Index Lookup]
-    C --&gt; D[Matching]
-    D --&gt; E[Ranking]
-</code></pre>
+                        <h1 id="the-inverted-index"><a class="header" href="#the-inverted-index">The Inverted Index</a></h1>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Term</th><th>Documents</th></tr>
+</thead>
+<tbody>
+<tr><td>wireless</td><td>1</td></tr>
+<tr><td>mouse</td><td>1, 2, 3</td></tr>
+<tr><td>gaming</td><td>2</td></tr>
+<tr><td>bluetooth</td><td>3</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="query-wireless-mouse"><a class="header" href="#query-wireless-mouse">Query: “wireless mouse”</a></h2>
+<ul>
+<li>wireless → 1</li>
+<li>mouse → 1, 2, 3</li>
+</ul>
+<p>Intersection → 1</p>
+<hr>
+<h2 id="visualization"><a class="header" href="#visualization">Visualization</a></h2>
+<pre class="mermaid">graph TD
+    A["wireless mouse"] --&gt; B["tokens"]
+    B --&gt; C["wireless"]
+    B --&gt; D["mouse"]
+    C --&gt; E["Doc1"]
+    D --&gt; F["Doc1, Doc2, Doc3"]
+    E --&gt; G["Intersect"]
+    F --&gt; G
+    G --&gt; H["Doc1"]
+
+### Speaker Notes
+
+- Start with: "Imagine we scan every document — too slow"
+- Emphasize: "We precompute this structure"
+- Walk through the table slowly
+- Ask: "Which document contains both words?"
+- Pause before saying "intersection"</pre>
+
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../day1/01_demo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../day1/pipeline.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../day1/03_inverted_index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../day1/fuzzy_search.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -201,11 +234,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../day1/01_demo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../day1/pipeline.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../day1/03_inverted_index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../day1/fuzzy_search.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

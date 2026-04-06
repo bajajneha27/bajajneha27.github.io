@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-d92085b1.js";
+            window.path_to_searchindex_js = "searchindex-e8e08c15.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-aee9a9dd.js"></script>
+        <script src="toc-ff2b06db.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -177,12 +177,6 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This workshop explores how search systems work, from traditional keyword-based approaches to modern AI-powered systems.</p>
-<p>We will build intuition through:</p>
-<ul>
-<li>demos</li>
-<li>simple mental models</li>
-<li>progressive improvements to search</li>
-</ul>
 <hr>
 <h2 id="what-youll-learn"><a class="header" href="#what-youll-learn">What you’ll learn</a></h2>
 <ul>
@@ -192,35 +186,164 @@
 <li>What Retrieval-Augmented Generation (RAG) is</li>
 </ul>
 <hr>
-<h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
-<p>Day 1: Traditional Search<br>Day 2: AI-powered Search (RAG)</p>
+<h2 id="agenda"><a class="header" href="#agenda">Agenda</a></h2>
+<h3 id="day-1--foundations-of-search-6070-min"><a class="header" href="#day-1--foundations-of-search-6070-min">Day 1 — Foundations of Search (60–70 min)</a></h3>
+<ul>
+<li>Demo: A Simple Search (10 min)</li>
+<li>How Search Works (10 min)</li>
+<li>Inverted Index (10 min)</li>
+<li>Fuzzy Search (10 min)</li>
+<li>Where Search Breaks (10 min)</li>
+<li>Search at Scale (10 min)</li>
+</ul>
+<h3 id="day-2--modern-search-with-ai-6070-min"><a class="header" href="#day-2--modern-search-with-ai-6070-min">Day 2 — Modern Search with AI (60–70 min)</a></h3>
+<ul>
+<li>Demo: Searching by Meaning (10 min)</li>
+<li>Embeddings (15 min)</li>
+<li>Semantic Search (10 min)</li>
+<li>RAG (15 min)</li>
+<li>Putting It All Together (10 min)</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="1-demo-a-simple-search"><a class="header" href="#1-demo-a-simple-search">1. Demo: A Simple Search</a></h1>
+<h1 id="demo-a-simple-search"><a class="header" href="#demo-a-simple-search">Demo: A Simple Search</a></h1>
+<p>Let’s try a live demo.</p>
+<ul>
+<li>wireless mouse</li>
+</ul>
+<hr>
+<h2 id="example-queries"><a class="header" href="#example-queries">Example queries</a></h2>
+<ul>
+<li>wireless mouse</li>
+<li>mouse</li>
+<li>gaming mouse</li>
+</ul>
+<hr>
+<h2 id="live-demo"><a class="header" href="#live-demo">Live Demo</a></h2>
+<p>Run the script:</p>
+<pre><code class="language-bash">python demo/search_demo.py</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="2-how-search-works"><a class="header" href="#2-how-search-works">2. How Search Works</a></h1>
+<h1 id="how-search-works"><a class="header" href="#how-search-works">How Search Works</a></h1>
 <p>At a high level, search follows a pipeline:</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid">graph LR
     A[Query] --&gt; B[Tokenization]
     B --&gt; C[Index Lookup]
     C --&gt; D[Matching]
     D --&gt; E[Ranking]
-</code></pre>
+</pre>
+
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="3-the-inverted-index"><a class="header" href="#3-the-inverted-index">3. The Inverted Index</a></h1>
-<p>Search systems rely on an inverted index.</p>
+<h1 id="the-inverted-index"><a class="header" href="#the-inverted-index">The Inverted Index</a></h1>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Term</th><th>Documents</th></tr>
+</thead>
+<tbody>
+<tr><td>wireless</td><td>1</td></tr>
+<tr><td>mouse</td><td>1, 2, 3</td></tr>
+<tr><td>gaming</td><td>2</td></tr>
+<tr><td>bluetooth</td><td>3</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="query-wireless-mouse"><a class="header" href="#query-wireless-mouse">Query: “wireless mouse”</a></h2>
+<ul>
+<li>wireless → 1</li>
+<li>mouse → 1, 2, 3</li>
+</ul>
+<p>Intersection → 1</p>
+<hr>
+<h2 id="visualization"><a class="header" href="#visualization">Visualization</a></h2>
+<pre class="mermaid">graph TD
+    A["wireless mouse"] --&gt; B["tokens"]
+    B --&gt; C["wireless"]
+    B --&gt; D["mouse"]
+    C --&gt; E["Doc1"]
+    D --&gt; F["Doc1, Doc2, Doc3"]
+    E --&gt; G["Intersect"]
+    F --&gt; G
+    G --&gt; H["Doc1"]
+
+### Speaker Notes
+
+- Start with: "Imagine we scan every document — too slow"
+- Emphasize: "We precompute this structure"
+- Walk through the table slowly
+- Ask: "Which document contains both words?"
+- Pause before saying "intersection"</pre>
+
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="4-ranking-results"><a class="header" href="#4-ranking-results">4. Ranking Results</a></h1>
-<p>Not all matching documents are equally relevant.</p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="5-handling-typos-fuzzy-search"><a class="header" href="#5-handling-typos-fuzzy-search">5. Handling Typos: Fuzzy Search</a></h1>
-<p>What happens if the query has mistakes?</p>
+<h1 id="handling-typos-fuzzy-search"><a class="header" href="#handling-typos-fuzzy-search">Handling Typos: Fuzzy Search</a></h1>
+<p>What happens if the query has a typo?</p>
 <p>Example:</p>
 <ul>
 <li>wirless mause</li>
 </ul>
+<hr>
+<h2 id="problem"><a class="header" href="#problem">Problem</a></h2>
+<p>Exact matching fails:</p>
+<ul>
+<li>“wirless” ≠ “wireless”</li>
+</ul>
+<hr>
+<h2 id="solution-fuzzy-matching"><a class="header" href="#solution-fuzzy-matching">Solution: Fuzzy Matching</a></h2>
+<p>Instead of exact match:</p>
+<ul>
+<li>find similar words</li>
+</ul>
+<hr>
+<h2 id="idea-intuition"><a class="header" href="#idea-intuition">Idea (intuition)</a></h2>
+<ul>
+<li>small spelling differences are allowed</li>
+<li>system suggests closest valid term</li>
+</ul>
+<hr>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<pre class="mermaid">graph LR
+    A["wirless"] --&gt; B["Did you mean: wireless"]
+    B --&gt; C["Results"]
+
+### Speaker Notes
+
+- Ask: "Have you ever mistyped a query?"
+- Show failure first
+- Then say: "Search systems are forgiving"
+- Keep it intuitive, avoid algorithm details</pre>
+
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="6-where-search-breaks"><a class="header" href="#6-where-search-breaks">6. Where Search Breaks</a></h1>
-<p>Even with fuzzy search, problems remain.</p>
+<h1 id="where-search-breaks"><a class="header" href="#where-search-breaks">Where Search Breaks</a></h1>
+<p>So far, we’ve seen search on small data.
+Real systems operate at massive scale.</p>
+<hr>
+<h2 id="challenges"><a class="header" href="#challenges">Challenges</a></h2>
+<ul>
+<li>Billions of documents</li>
+<li>Very low latency (milliseconds)</li>
+<li>Constant updates</li>
+<li>Fault tolerance</li>
+</ul>
+<hr>
+<h2 id="high-level-architecture"><a class="header" href="#high-level-architecture">High-Level Architecture</a></h2>
+<pre class="mermaid">graph LR
+    A[User Query] --&gt; B[Frontend]
+    B --&gt; C[Query Processor]
+    C --&gt; D[Shard 1]
+    C --&gt; E[Shard 2]
+    C --&gt; F[Shard N]
+    D --&gt; G[Results]
+    E --&gt; G
+    F --&gt; G
+    G --&gt; H[Merge &amp; Rank]
+    H --&gt; I[Response]
+
+### Speaker Notes
+
+- Say: "Same logic, just many machines"
+- Point at shards and say: "These run in parallel"
+- Emphasize latency: "milliseconds"
+- Avoid deep distributed system details</pre>
+
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="7-demo-searching-by-meaning"><a class="header" href="#7-demo-searching-by-meaning">7. Demo: Searching by Meaning</a></h1>
 <p>Try searching:</p>
@@ -238,12 +361,13 @@
 <p>RAG combines retrieval with generation.</p>
 <hr>
 <h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid">graph LR
     A[Query] --&gt; B[Retriever]
     B --&gt; C[Documents]
     C --&gt; D[LLM]
     D --&gt; E[Answer]
-</code></pre>
+</pre>
+
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="11-putting-it-all-together"><a class="header" href="#11-putting-it-all-together">11. Putting It All Together</a></h1>
 <p>Compare different approaches:</p>
