@@ -35,11 +35,11 @@
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
-            const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-dc4c61e2.js";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-234a12f9.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-ff2b06db.js"></script>
+        <script src="toc-c07511ab.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -189,11 +189,12 @@
 <h3 id="agenda"><a class="header" href="#agenda">Agenda</a></h3>
 <h4 id="day-1--foundations-of-search-6070-min"><a class="header" href="#day-1--foundations-of-search-6070-min">Day 1 — Foundations of Search (60–70 min)</a></h4>
 <ul>
-<li>Demo: A Simple Search (10 min)</li>
-<li>How Search Works (10 min)</li>
-<li>Inverted Index (10 min)</li>
-<li>Fuzzy Search (10 min)</li>
-<li>Where Search Breaks (10 min)</li>
+<li>Demo: A Simple Search (5 min)</li>
+<li>What is Information Retrieval? (5 min)</li>
+<li>Query Processing ( 10 min)</li>
+<li>Inverted Index (15 min)</li>
+<li>Fuzzy Search (5 min)</li>
+<li>Limits of Keyword Search (5 min)</li>
 <li>Search at Scale (10 min)</li>
 </ul>
 <h4 id="day-2--modern-search-with-ai-6070-min"><a class="header" href="#day-2--modern-search-with-ai-6070-min">Day 2 — Modern Search with AI (60–70 min)</a></h4>
@@ -206,33 +207,83 @@
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="demo-a-simple-search"><a class="header" href="#demo-a-simple-search">Demo: A Simple Search</a></h1>
-<p>Let’s try a live demo.</p>
+<p>Let’s start with a simple search system:</p>
+<p>We have a small collection of documents:</p>
 <ul>
-<li>wireless mouse</li>
+<li>Doc1: wireless mouse for laptop</li>
+<li>Doc2: gaming mouse with RGB</li>
+<li>Doc3: bluetooth presentation pointer</li>
+<li>Doc4: budget office mouse</li>
 </ul>
 <hr>
-<h2 id="example-queries"><a class="header" href="#example-queries">Example queries</a></h2>
-<ul>
-<li>wireless mouse</li>
-<li>mouse</li>
-<li>gaming mouse</li>
-</ul>
+<h3 id="try-wireless-mouse"><a class="header" href="#try-wireless-mouse">Try: “wireless mouse”</a></h3>
+<p>We get Doc1.<br>This works because both words are present.</p>
 <hr>
-<h2 id="live-demo"><a class="header" href="#live-demo">Live Demo</a></h2>
-<p>Run the script:</p>
-<pre><code class="language-bash">python demo/search_demo.py</code></pre>
+<h3 id="try-mouse"><a class="header" href="#try-mouse">Try: “mouse”</a></h3>
+<p>We get multiple documents.<br>This works because more documents contain the word “mouse”.</p>
+<hr>
+<h3 id="try-laptop-mouse"><a class="header" href="#try-laptop-mouse">Try: “laptop mouse”</a></h3>
+<p>We only get documents containing both words.<br>This system performs an AND operation.</p>
+<hr>
+<h3 id="try-wirless-mouse"><a class="header" href="#try-wirless-mouse">Try: “wirless mouse”</a></h3>
+<p>No results.</p>
+<p>Even though the intent is clear, the system fails due to exact matching.</p>
+<hr>
+<h3 id="try-device-for-presentations"><a class="header" href="#try-device-for-presentations">Try: “device for presentations”</a></h3>
+<p>No results again.</p>
+<p>Even though Doc3 is relevant.</p>
+<hr>
+<p>Let’s now understand what’s happening internally.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="how-search-works"><a class="header" href="#how-search-works">How Search Works</a></h1>
-<p>At a high level, search follows a pipeline:</p>
-<pre class="mermaid">graph LR
-    A[Query] --&gt; B[Tokenization]
-    B --&gt; C[Index Lookup]
-    C --&gt; D[Matching]
-    D --&gt; E[Ranking]
-</pre>
-
+<h1 id="what-is-information-retrieval"><a class="header" href="#what-is-information-retrieval">What is Information Retrieval?</a></h1>
+<p>An Information Retrieval (IR) system retrieves relevant documents for a given query.</p>
+<hr>
+<h2 id="key-difference-from-databases"><a class="header" href="#key-difference-from-databases">Key difference from databases</a></h2>
+<ul>
+<li>Databases → exact match</li>
+<li>IR systems → relevance-based</li>
+</ul>
+<hr>
+<h2 id="speed-requirement"><a class="header" href="#speed-requirement">Speed requirement</a></h2>
+<p>Search systems must respond in milliseconds.</p>
+<p>To achieve this:</p>
+<ul>
+<li>heavy computation is done beforehand</li>
+<li>efficient data structures are built</li>
+<li>query-time work is minimized</li>
+</ul>
+<hr>
+<h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
+<p>Query → Process → Retrieve → Rank → Results</p>
+<hr>
+<p>Let’s break it down.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="query-processing"><a class="header" href="#query-processing">Query Processing</a></h1>
+<p>Let’s take:</p>
+<p>best wireless mouse for presentations</p>
+<hr>
+<h2 id="step-1-tokenization"><a class="header" href="#step-1-tokenization">Step 1: Tokenization</a></h2>
+<p>[“best”, “wireless”, “mouse”, “for”, “presentations”]</p>
+<hr>
+<h2 id="step-2-stop-words"><a class="header" href="#step-2-stop-words">Step 2: Stop Words</a></h2>
+<p>Remove common words:</p>
+<p>[“best”, “wireless”, “mouse”, “presentations”]</p>
+<hr>
+<h2 id="step-3-stemming--lemmatization"><a class="header" href="#step-3-stemming--lemmatization">Step 3: Stemming / Lemmatization</a></h2>
+<p>[“best”, “wireless”, “mouse”, “presentation”]</p>
+<hr>
+<h2 id="step-4-normalization-challenges"><a class="header" href="#step-4-normalization-challenges">Step 4: Normalization Challenges</a></h2>
+<ul>
+<li>AI vs Artificial Intelligence</li>
+<li>TV vs Television</li>
+</ul>
+<hr>
+<p>Next: how do we efficiently find documents?</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="the-inverted-index"><a class="header" href="#the-inverted-index">The Inverted Index</a></h1>
+<p>Imagine a room full of books.</p>
+<p>You are asked:
+Find all books containing the word “mouse”.</p>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -254,19 +305,28 @@
 </ul>
 <p>Intersection → 1</p>
 <hr>
-<h2 id="visualization"><a class="header" href="#visualization">Visualization</a></h2>
-<pre class="mermaid">graph TD
-    A["wireless mouse"] --&gt; B["tokens"]
-    B --&gt; C["wireless"]
-    B --&gt; D["mouse"]
-    C --&gt; E["Doc1"]
-    D --&gt; F["Doc1, Doc2, Doc3"]
-    E --&gt; G["Intersect"]
-    F --&gt; G
-    G --&gt; H["Doc1"]
-</pre>
-
-<details>
+<h2 id="terminology"><a class="header" href="#terminology">Terminology</a></h2>
+<ul>
+<li>Term = word</li>
+<li>Postings list = list of documents</li>
+</ul>
+<hr>
+<h2 id="query"><a class="header" href="#query">Query</a></h2>
+<p>wireless mouse</p>
+<p>→ lookup both<br>→ intersect results<br>→ Doc1</p>
+<hr>
+<h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
+<ul>
+<li>stored on disk</li>
+<li>cached in memory for fast access</li>
+</ul>
+<hr>
+<h2 id="data-structures"><a class="header" href="#data-structures">Data structures</a></h2>
+<ul>
+<li>hash tables</li>
+<li>B-trees</li>
+</ul>
+<hr><details>
 <summary> Speaker Notes </summary>
 <ul>
 <li>Start with: “Imagine we scan every document — too slow”</li>
@@ -276,7 +336,7 @@
 <li>Pause before saying “intersection”</li>
 </ul>
 </details><div style="break-before: page; page-break-before: always;"></div>
-<h1 id="handling-typos-fuzzy-search"><a class="header" href="#handling-typos-fuzzy-search">Handling Typos: Fuzzy Search</a></h1>
+<h1 id="fuzzy-search--tolerant-retrieval"><a class="header" href="#fuzzy-search--tolerant-retrieval">Fuzzy Search &amp; Tolerant Retrieval</a></h1>
 <p>What happens if the query has a typo?</p>
 <p>Example:</p>
 <ul>
@@ -290,67 +350,74 @@
 </ul>
 <hr>
 <h2 id="solution-fuzzy-matching"><a class="header" href="#solution-fuzzy-matching">Solution: Fuzzy Matching</a></h2>
-<p>Instead of exact match:</p>
 <ul>
-<li>find similar words</li>
+<li>Edit distance</li>
+<li>k-gram indexing</li>
+<li>phonetic matching</li>
+<li>dictionary-based correction</li>
 </ul>
 <hr>
-<h2 id="idea-intuition"><a class="header" href="#idea-intuition">Idea (intuition)</a></h2>
+<h2 id="wildcard-queries"><a class="header" href="#wildcard-queries">Wildcard Queries</a></h2>
+<p>Example:
+mous*</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="limits-of-keyword-search"><a class="header" href="#limits-of-keyword-search">Limits of Keyword Search</a></h1>
+<p>Example:
+device for presentations</p>
+<hr>
+<h2 id="problem-1"><a class="header" href="#problem-1">Problem</a></h2>
+<p>No keyword overlap.</p>
+<hr>
+<h2 id="synonyms"><a class="header" href="#synonyms">Synonyms</a></h2>
+<p>We can map:
+cheap → budget</p>
+<p>But this does not scale.</p>
+<hr>
+<p>Language is too flexible for keyword matching.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="search-at-scale"><a class="header" href="#search-at-scale">Search at Scale</a></h1>
+<p>Google does NOT search the web in real time. It searches a pre-built index.</p>
+<hr>
+<h2 id="3-stages"><a class="header" href="#3-stages">3 Stages</a></h2>
+<h3 id="1-crawling"><a class="header" href="#1-crawling">1. Crawling</a></h3>
 <ul>
-<li>small spelling differences are allowed</li>
-<li>system suggests closest valid term</li>
+<li>discovers pages using bots ( Googlebot )</li>
+<li>follows links</li>
+<li>continuous process</li>
 </ul>
 <hr>
-<h2 id="example"><a class="header" href="#example">Example</a></h2>
-<pre class="mermaid">graph LR
-    A["wirless"] --&gt; B["Did you mean: wireless"]
-    B --&gt; C["Results"]
-</pre>
-
-<details>
-<summary> Speaker Notes </summary>
+<h3 id="2-indexing"><a class="header" href="#2-indexing">2. Indexing</a></h3>
 <ul>
-<li>Ask: “Have you ever mistyped a query?”</li>
-<li>Show failure first</li>
-<li>Then say: “Search systems are forgiving”</li>
-<li>Keep it intuitive, avoid algorithm details</li>
-</ul>
-</details><div style="break-before: page; page-break-before: always;"></div>
-<h1 id="where-search-breaks"><a class="header" href="#where-search-breaks">Where Search Breaks</a></h1>
-<p>So far, we’ve seen search on small data.
-Real systems operate at massive scale.</p>
-<hr>
-<h2 id="challenges"><a class="header" href="#challenges">Challenges</a></h2>
-<ul>
-<li>Billions of documents</li>
-<li>Very low latency (milliseconds)</li>
-<li>Constant updates</li>
-<li>Fault tolerance</li>
+<li>processes content</li>
+<li>extracts signals</li>
+<li>builds massive inverted indexes</li>
+<li>stores multiple indexes (web, images, videos)</li>
 </ul>
 <hr>
-<h2 id="high-level-architecture"><a class="header" href="#high-level-architecture">High-Level Architecture</a></h2>
-<pre class="mermaid">graph LR
-    A[User Query] --&gt; B[Frontend]
-    B --&gt; C[Query Processor]
-    C --&gt; D[Shard 1]
-    C --&gt; E[Shard 2]
-    C --&gt; F[Shard N]
-    D --&gt; G[Results]
-    E --&gt; G
-    F --&gt; G
-    G --&gt; H[Merge &amp; Rank]
-    H --&gt; I[Response]
-</pre>
-
-<details>
-<summary> Speaker Notes </summary>
+<h3 id="3-serving"><a class="header" href="#3-serving">3. Serving</a></h3>
 <ul>
-<li>Say: “Same logic, just many machines”</li>
-<li>Point at shards and say: “These run in parallel”</li>
-<li>Emphasize latency: “milliseconds”</li>
-<li>Avoid deep distributed system details</li>
+<li>processes query</li>
+<li>retrieves candidates</li>
+<li>ranks results</li>
 </ul>
-</details><div style="break-before: page; page-break-before: always;"></div>
+<hr>
+<h2 id="ranking-signals"><a class="header" href="#ranking-signals">Ranking Signals</a></h2>
+<ul>
+<li>relevance</li>
+<li>quality</li>
+<li>freshness</li>
+<li>user context</li>
+</ul>
+<hr>
+<h2 id="scale-challenges"><a class="header" href="#scale-challenges">Scale Challenges</a></h2>
+<ul>
+<li>billions of documents</li>
+<li>distributed systems</li>
+<li>caching</li>
+<li>parallel processing</li>
+<li>constant updates</li>
+</ul>
+<hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="7-demo-searching-by-meaning"><a class="header" href="#7-demo-searching-by-meaning">7. Demo: Searching by Meaning</a></h1>
 <p>Try searching:</p>
 <ul>
@@ -366,7 +433,7 @@ Real systems operate at massive scale.</p>
 <h1 id="10-retrieval-augmented-generation"><a class="header" href="#10-retrieval-augmented-generation">10. Retrieval-Augmented Generation</a></h1>
 <p>RAG combines retrieval with generation.</p>
 <hr>
-<h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
+<h2 id="pipeline-1"><a class="header" href="#pipeline-1">Pipeline</a></h2>
 <pre class="mermaid">graph LR
     A[Query] --&gt; B[Retriever]
     B --&gt; C[Documents]

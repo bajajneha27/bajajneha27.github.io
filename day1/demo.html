@@ -34,11 +34,11 @@
         <script>
             const path_to_root = "../";
             const default_light_theme = "light";
-            const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-dc4c61e2.js";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-234a12f9.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-ff2b06db.js"></script>
+        <script src="../toc-c07511ab.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -175,21 +175,33 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="demo-a-simple-search"><a class="header" href="#demo-a-simple-search">Demo: A Simple Search</a></h1>
-<p>Let’s try a live demo.</p>
+<p>Let’s start with a simple search system:</p>
+<p>We have a small collection of documents:</p>
 <ul>
-<li>wireless mouse</li>
+<li>Doc1: wireless mouse for laptop</li>
+<li>Doc2: gaming mouse with RGB</li>
+<li>Doc3: bluetooth presentation pointer</li>
+<li>Doc4: budget office mouse</li>
 </ul>
 <hr>
-<h2 id="example-queries"><a class="header" href="#example-queries">Example queries</a></h2>
-<ul>
-<li>wireless mouse</li>
-<li>mouse</li>
-<li>gaming mouse</li>
-</ul>
+<h3 id="try-wireless-mouse"><a class="header" href="#try-wireless-mouse">Try: “wireless mouse”</a></h3>
+<p>We get Doc1.<br>This works because both words are present.</p>
 <hr>
-<h2 id="live-demo"><a class="header" href="#live-demo">Live Demo</a></h2>
-<p>Run the script:</p>
-<pre><code class="language-bash">python demo/search_demo.py</code></pre>
+<h3 id="try-mouse"><a class="header" href="#try-mouse">Try: “mouse”</a></h3>
+<p>We get multiple documents.<br>This works because more documents contain the word “mouse”.</p>
+<hr>
+<h3 id="try-laptop-mouse"><a class="header" href="#try-laptop-mouse">Try: “laptop mouse”</a></h3>
+<p>We only get documents containing both words.<br>This system performs an AND operation.</p>
+<hr>
+<h3 id="try-wirless-mouse"><a class="header" href="#try-wirless-mouse">Try: “wirless mouse”</a></h3>
+<p>No results.</p>
+<p>Even though the intent is clear, the system fails due to exact matching.</p>
+<hr>
+<h3 id="try-device-for-presentations"><a class="header" href="#try-device-for-presentations">Try: “device for presentations”</a></h3>
+<p>No results again.</p>
+<p>Even though Doc3 is relevant.</p>
+<hr>
+<p>Let’s now understand what’s happening internally.</p>
 
                     </main>
 
