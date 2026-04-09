@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-084b3fe4.js";
+            window.path_to_searchindex_js = "../searchindex-3f1af10d.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-268410e3.js"></script>
@@ -175,48 +175,14 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="search-at-scale"><a class="header" href="#search-at-scale">Search at Scale</a></h1>
-<p>Google does NOT search the web in real time. It searches a pre-built index.</p>
-<hr>
-<h2 id="3-stages"><a class="header" href="#3-stages">3 Stages</a></h2>
-<h3 id="1-crawling"><a class="header" href="#1-crawling">1. Crawling</a></h3>
-<ul>
-<li>discovers pages using bots ( Googlebot )</li>
-<li>follows links</li>
-<li>continuous process</li>
-</ul>
-<hr>
-<h3 id="2-indexing"><a class="header" href="#2-indexing">2. Indexing</a></h3>
-<ul>
-<li>processes content</li>
-<li>extracts signals</li>
-<li>builds massive inverted indexes</li>
-<li>stores multiple indexes (web, images, videos)</li>
-</ul>
-<hr>
-<h3 id="3-serving"><a class="header" href="#3-serving">3. Serving</a></h3>
-<ul>
-<li>processes query</li>
-<li>retrieves candidates</li>
-<li>ranks results</li>
-</ul>
-<hr>
-<h2 id="ranking-signals"><a class="header" href="#ranking-signals">Ranking Signals</a></h2>
-<ul>
-<li>relevance</li>
-<li>quality</li>
-<li>freshness</li>
-<li>user context</li>
-</ul>
-<hr>
-<h2 id="scale-challenges"><a class="header" href="#scale-challenges">Scale Challenges</a></h2>
-<ul>
-<li>billions of documents</li>
-<li>distributed systems</li>
-<li>caching</li>
-<li>parallel processing</li>
-<li>constant updates</li>
-</ul>
-<hr>
+<p>To handle billions of queries a day across trillions of web pages in milliseconds, Google moves beyond a simple inverted index into a massive, distributed infrastructure.</p>
+<h2 id="the-distributed-index"><a class="header" href="#the-distributed-index">The Distributed Index</a></h2>
+<p>Google doesn’t store its index on one machine. The index is split into thousands of pieces across different data centers. When you search, your query is sent to thousands of machines simultaneously, each checking its small piece of the web and reporting back.</p>
+<h2 id="ranking-pagerank-to-bert"><a class="header" href="#ranking-pagerank-to-bert">Ranking: PageRank to BERT</a></h2>
+<p>In the early days, Google used PageRank, which treated links like “votes”. Today, it uses deep learning models like <em>BERT</em> and <em>MUM</em> to understand the actual intent of your sentence, allowing it to move past mere keyword matching.</p>
+<h2 id="caching-and-global-load-balancing"><a class="header" href="#caching-and-global-load-balancing">Caching and Global Load Balancing</a></h2>
+<p>To stay fast, Google uses Google Front Ends (GFEs) and heavy caching. If 1,000,000 people search for “weather” in the same minute, Google doesn’t re-calculate the search every time; it serves a cached result from a server physically close to the user.</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
