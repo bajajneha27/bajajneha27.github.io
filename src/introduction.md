@@ -18,7 +18,7 @@ This workshop explores how search systems work, from traditional keyword-based a
 
 #### Day 1 — Foundations of Search (60–70 min)
 
-- Demo: A Simple Search (5 min)
+- Introduction to Search Engine (5 min)
 - What is Information Retrieval? (5 min)
 - Query Processing ( 10 min)
 - Inverted Index (15 min)

@@ -4,7 +4,7 @@
 
 # Day 1 — Foundations of Search
 
-- [Demo: A Simple Search](day1/demo.md)
+- [Introduction to Search Engine](day1/intro.md)
 - [What is Information Retrieval?](day1/pipeline.md)
 - [Query Processing](day1/tokenization.md)
 - [The Inverted Index](day1/inverted_index.md)
