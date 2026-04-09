@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-128b4b24.js";
+            window.path_to_searchindex_js = "searchindex-7c7fa63a.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-47fed0ea.js"></script>
@@ -241,57 +241,56 @@
 <p>Some other transformation techniques that can be considered are:</p>
 <ul>
 <li>Handling punctuations: <code>Python!</code> $\rightarrow$ <code>python</code></li>
+<li>Handling abbreviations: <code>AI</code> $\rightarrow$ <code>Artificial Intelligence</code></li>
 <li>Synonym Expansion: <code>laptop</code> $\rightarrow$ <code>[computer, notebook]</code></li>
 <li>De-compounding: <code>smartphone</code> $\rightarrow$ <code>[smart, phone]</code></li>
 <li>N-grams: <code>python</code> $\rightarrow$ <code>[pyt, yth, tho, hon]</code></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="the-inverted-index"><a class="header" href="#the-inverted-index">The Inverted Index</a></h1>
-<p>Imagine a room full of books.</p>
-<p>You are asked:
-Find all books containing the word “mouse”.</p>
-<p>Doc A: “Introduction to Programming with Python”</p>
-<p>Doc B: “Advanced Programmers Handbook”</p>
-<p>Doc C: “The History of Computer Programs”</p>
-<p>Doc D: “A Guide to Gardening in the Spring”</p>
+<p>Documents collection:</p>
+<ul>
+<li>Doc1: “Introduction to Programming with Python”</li>
+<li>Doc2: “Advanced Programmers Handbook”</li>
+<li>Doc3: “The History of Computer Programs”</li>
+<li>Doc4: “A Guide to Gardening in the Spring”</li>
+</ul>
+<h3 id="mapping-terms-to-documents"><a class="header" href="#mapping-terms-to-documents">Mapping Terms to Documents</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Term</th><th>Documents</th></tr>
 </thead>
 <tbody>
-<tr><td>wireless</td><td>1</td></tr>
-<tr><td>mouse</td><td>1, 2, 3</td></tr>
-<tr><td>gaming</td><td>2</td></tr>
-<tr><td>bluetooth</td><td>3</td></tr>
+<tr><td><code>introduc</code></td><td>1</td></tr>
+<tr><td><code>program</code></td><td>1, 2, 3</td></tr>
+<tr><td><code>python</code></td><td>1</td></tr>
+<tr><td><code>advanc</code></td><td>2</td></tr>
+<tr><td><code>handbook</code></td><td>2</td></tr>
+<tr><td><code>histori</code></td><td>3</td></tr>
+<tr><td><code>comput</code></td><td>3</td></tr>
+<tr><td><code>garden</code></td><td>4</td></tr>
+<tr><td><code>spring</code></td><td>4</td></tr>
 </tbody>
 </table>
 </div>
 <hr>
-<h2 id="terminology"><a class="header" href="#terminology">Terminology</a></h2>
+<h3 id="core-concepts"><a class="header" href="#core-concepts">Core Concepts</a></h3>
+<p>An inverted index is made of two main parts:</p>
 <ul>
-<li>Term = word</li>
-<li>Postings list = list of documents</li>
+<li><strong>The Dictionary</strong>: A list of all unique terms (stems) in the collection.</li>
+<li><strong>The Postings List</strong>: The actual lists of document IDs associated with those terms.</li>
 </ul>
-<hr>
-<h2 id="query"><a class="header" href="#query">Query</a></h2>
-<p>wireless mouse</p>
+<h3 id="data-structures-for-dictionary"><a class="header" href="#data-structures-for-dictionary">Data Structures for Dictionary:</a></h3>
 <ul>
-<li>wireless → 1</li>
-<li>mouse → 1, 2, 3</li>
+<li><strong>Hash Tables</strong>: Provide $O(1)$ lookup time. Great for exact matches, but they don’t support “starts with” or range searches.</li>
+<li><strong>B Trees</strong>: Most common in production databases (like PostgreSQL). They keep terms sorted, which is essential for searching for things like comput* to find both “computer” and “computing.”</li>
+<li><strong>Tries (Prefix Trees)</strong>: Extremely efficient for storing overlapping prefixes (like apple, apply, applied).</li>
 </ul>
-<p>Intersection → 1</p>
-<hr>
-<h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
+<h3 id="storing-the-postings-the-postings-list"><a class="header" href="#storing-the-postings-the-postings-list">Storing the Postings (The “Postings List”)</a></h3>
 <ul>
-<li>stored on disk</li>
-<li>cached in memory for fast access</li>
-</ul>
-<hr>
-<h2 id="data-structures"><a class="header" href="#data-structures">Data structures</a></h2>
-<ul>
-<li>hash tables</li>
-<li>B-trees</li>
+<li><strong>Linked Lists vs. Arrays</strong>: We usually use Variable-length Arrays. They are more cache-friendly than linked lists and allow for faster “jumping” during intersection math.</li>
+<li><strong>Compression (Delta Encoding)</strong>: Instead of storing IDs like [102, 105, 110], we store the gaps: [102, 3, 5]. Smaller numbers take up fewer bits, significantly reducing the index size on disk.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="query-processing"><a class="header" href="#query-processing">Query Processing</a></h1>
