@@ -6,6 +6,14 @@ Imagine a room full of books.
 You are asked:
 Find all books containing the word "mouse".
 
+Doc A: "Introduction to Programming with Python"
+
+Doc B: "Advanced Programmers Handbook"
+
+Doc C: "The History of Computer Programs"
+
+Doc D: "A Guide to Gardening in the Spring"
+
 | Term      | Documents       |
 |----------|----------------|
 | wireless | 1              |
