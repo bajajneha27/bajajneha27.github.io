@@ -28,9 +28,9 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # 2. Define our "documents"
 sentences = [
-    "The cat sits outside", 
-    "A man is playing guitar", 
-    "The feline is resting outdoors"
+    "High-precision wireless gaming mouse with RGB",
+    "Ergonomic vertical mouse for wrist pain relief",
+    "Travel-friendly Bluetooth mouse with silent clicks"
 ]
 
 # 3. Encode the sentences into vectors
