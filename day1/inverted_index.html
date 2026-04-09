@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-234a12f9.js";
+            window.path_to_searchindex_js = "../searchindex-d9b084b1.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-c07511ab.js"></script>
+        <script src="../toc-c7a355e7.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -192,13 +192,6 @@ Find all books containing the word “mouse”.</p>
 </table>
 </div>
 <hr>
-<h2 id="query-wireless-mouse"><a class="header" href="#query-wireless-mouse">Query: “wireless mouse”</a></h2>
-<ul>
-<li>wireless → 1</li>
-<li>mouse → 1, 2, 3</li>
-</ul>
-<p>Intersection → 1</p>
-<hr>
 <h2 id="terminology"><a class="header" href="#terminology">Terminology</a></h2>
 <ul>
 <li>Term = word</li>
@@ -207,7 +200,11 @@ Find all books containing the word “mouse”.</p>
 <hr>
 <h2 id="query"><a class="header" href="#query">Query</a></h2>
 <p>wireless mouse</p>
-<p>→ lookup both<br>→ intersect results<br>→ Doc1</p>
+<ul>
+<li>wireless → 1</li>
+<li>mouse → 1, 2, 3</li>
+</ul>
+<p>Intersection → 1</p>
 <hr>
 <h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
 <ul>
@@ -220,16 +217,7 @@ Find all books containing the word “mouse”.</p>
 <li>hash tables</li>
 <li>B-trees</li>
 </ul>
-<hr><details>
-<summary> Speaker Notes </summary>
-<ul>
-<li>Start with: “Imagine we scan every document — too slow”</li>
-<li>Emphasize: “We precompute this structure”</li>
-<li>Walk through the table slowly</li>
-<li>Ask: “Which document contains both words?”</li>
-<li>Pause before saying “intersection”</li>
-</ul>
-</details>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-234a12f9.js";
+            window.path_to_searchindex_js = "searchindex-d9b084b1.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c07511ab.js"></script>
+        <script src="toc-c7a355e7.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -199,11 +199,12 @@
 </ul>
 <h4 id="day-2--modern-search-with-ai-6070-min"><a class="header" href="#day-2--modern-search-with-ai-6070-min">Day 2 — Modern Search with AI (60–70 min)</a></h4>
 <ul>
-<li>Demo: Searching by Meaning (10 min)</li>
+<li>Searching by Meaning (5 min)</li>
 <li>Embeddings (15 min)</li>
 <li>Semantic Search (10 min)</li>
-<li>RAG (15 min)</li>
-<li>Putting It All Together (10 min)</li>
+<li>Vector Search (15 min)</li>
+<li>RAG ( Retrieval-Augmented Generation) (10 min)</li>
+<li>Demo: Mini AI Search App ( 5 min)</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="demo-a-simple-search"><a class="header" href="#demo-a-simple-search">Demo: A Simple Search</a></h1>
@@ -298,13 +299,6 @@ Find all books containing the word “mouse”.</p>
 </table>
 </div>
 <hr>
-<h2 id="query-wireless-mouse"><a class="header" href="#query-wireless-mouse">Query: “wireless mouse”</a></h2>
-<ul>
-<li>wireless → 1</li>
-<li>mouse → 1, 2, 3</li>
-</ul>
-<p>Intersection → 1</p>
-<hr>
 <h2 id="terminology"><a class="header" href="#terminology">Terminology</a></h2>
 <ul>
 <li>Term = word</li>
@@ -313,7 +307,11 @@ Find all books containing the word “mouse”.</p>
 <hr>
 <h2 id="query"><a class="header" href="#query">Query</a></h2>
 <p>wireless mouse</p>
-<p>→ lookup both<br>→ intersect results<br>→ Doc1</p>
+<ul>
+<li>wireless → 1</li>
+<li>mouse → 1, 2, 3</li>
+</ul>
+<p>Intersection → 1</p>
 <hr>
 <h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
 <ul>
@@ -326,16 +324,7 @@ Find all books containing the word “mouse”.</p>
 <li>hash tables</li>
 <li>B-trees</li>
 </ul>
-<hr><details>
-<summary> Speaker Notes </summary>
-<ul>
-<li>Start with: “Imagine we scan every document — too slow”</li>
-<li>Emphasize: “We precompute this structure”</li>
-<li>Walk through the table slowly</li>
-<li>Ask: “Which document contains both words?”</li>
-<li>Pause before saying “intersection”</li>
-</ul>
-</details><div style="break-before: page; page-break-before: always;"></div>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="fuzzy-search--tolerant-retrieval"><a class="header" href="#fuzzy-search--tolerant-retrieval">Fuzzy Search &amp; Tolerant Retrieval</a></h1>
 <p>What happens if the query has a typo?</p>
 <p>Example:</p>
@@ -419,45 +408,73 @@ cheap → budget</p>
 </ul>
 <hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="7-demo-searching-by-meaning"><a class="header" href="#7-demo-searching-by-meaning">7. Demo: Searching by Meaning</a></h1>
-<p>Try searching:</p>
-<ul>
-<li>device for presentations</li>
-</ul>
+<p>Let’s revisit a query:</p>
+<p>“device for presentations”</p>
+<p>Traditional search fails because there is no keyword overlap.</p>
+<p>Semantic search retrieves results based on meaning, not exact words.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="8-from-words-to-meaning-embeddings"><a class="header" href="#8-from-words-to-meaning-embeddings">8. From Words to Meaning: Embeddings</a></h1>
-<p>Modern systems represent text as vectors.</p>
+<p>Embeddings convert text into numerical vectors.</p>
+<hr>
+<h2 id="idea"><a class="header" href="#idea">Idea</a></h2>
+<p>Words with similar meanings are placed closer together in vector space.</p>
+<hr>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<ul>
+<li>car ≈ automobile</li>
+<li>mouse ≈ pointer</li>
+</ul>
+<hr>
+<h2 id="key-insight"><a class="header" href="#key-insight">Key Insight</a></h2>
+<p>We compare vectors instead of words.</p>
+<hr>
+<h2 id="how-generated"><a class="header" href="#how-generated">How generated?</a></h2>
+<p>Using machine learning models trained on large text data.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="9-semantic-search"><a class="header" href="#9-semantic-search">9. Semantic Search</a></h1>
 <p>Instead of matching words, we match meaning.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="10-retrieval-augmented-generation"><a class="header" href="#10-retrieval-augmented-generation">10. Retrieval-Augmented Generation</a></h1>
-<p>RAG combines retrieval with generation.</p>
+<h1 id="vector-search"><a class="header" href="#vector-search">Vector Search</a></h1>
+<p>Vector search finds similar items using embeddings.</p>
 <hr>
-<h2 id="pipeline-1"><a class="header" href="#pipeline-1">Pipeline</a></h2>
-<pre class="mermaid">graph LR
-    A[Query] --&gt; B[Retriever]
-    B --&gt; C[Documents]
-    C --&gt; D[LLM]
-    D --&gt; E[Answer]
-</pre>
-
+<h2 id="process"><a class="header" href="#process">Process</a></h2>
+<ol>
+<li>Convert query to vector</li>
+<li>Search for nearest vectors</li>
+<li>Retrieve similar documents</li>
+</ol>
+<hr>
+<h2 id="key-difference"><a class="header" href="#key-difference">Key Difference</a></h2>
+<p>Traditional search → exact lookup<br>Vector search → nearest neighbor search</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="11-putting-it-all-together"><a class="header" href="#11-putting-it-all-together">11. Putting It All Together</a></h1>
-<p>Compare different approaches:</p>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Query</th><th>Keyword</th><th>Fuzzy</th><th>Semantic</th></tr>
-</thead>
-<tbody>
-<tr><td>wireless mouse</td><td>✅</td><td>✅</td><td>✅</td></tr>
-<tr><td>wirless mause</td><td>❌</td><td>✅</td><td>✅</td></tr>
-<tr><td>presentation device</td><td>❌</td><td>❌</td><td>✅</td></tr>
-</tbody>
-</table>
-</div>
+<h1 id="10-retrieval-augmented-generation"><a class="header" href="#10-retrieval-augmented-generation">10. Retrieval-Augmented Generation</a></h1>
+<p>RAG combines retrieval with language models.</p>
+<hr>
+<h2 id="problem-2"><a class="header" href="#problem-2">Problem</a></h2>
+<p>LLMs:</p>
+<ul>
+<li>may hallucinate</li>
+<li>lack real-time knowledge</li>
+</ul>
+<hr>
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
+<ol>
+<li>Retrieve relevant documents</li>
+<li>Pass them to LLM</li>
+<li>Generate answer</li>
+</ol>
+<hr>
+<h2 id="flow"><a class="header" href="#flow">Flow</a></h2>
+<p>Query → Retrieve → Generate</p>
+<hr>
+<h2 id="benefit"><a class="header" href="#benefit">Benefit</a></h2>
+<ul>
+<li>grounded answers</li>
+<li>more accurate</li>
+<li>context-aware</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="12-modern-search-systems"><a class="header" href="#12-modern-search-systems">12. Modern Search Systems</a></h1>
+<h1 id="12-demo-mini-ai-search-app"><a class="header" href="#12-demo-mini-ai-search-app">12. Demo: Mini AI Search App</a></h1>
 <p>Modern systems combine multiple techniques:</p>
 <ul>
 <li>keyword search</li>
