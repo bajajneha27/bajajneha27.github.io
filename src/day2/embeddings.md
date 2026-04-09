@@ -1,29 +1,56 @@
 
 # 8. From Words to Meaning: Embeddings
 
-Embeddings convert text into numerical vectors.
+At the heart of AI search is the transformation of unstructured text into high-dimensional numerical vectors.
+
+An embedding is a vector (list) of floating point numbers. The distance between two vectors measures their relatedness. Small distances suggest high relatedness and large distances suggest low relatedness.
 
 ---
 
-## Idea
+Embeddings are commonly used for:
 
-Words with similar meanings are placed closer together in vector space.
-
----
-
-## Example
-
-- car ≈ automobile  
-- mouse ≈ pointer  
+- **Search** (where results are ranked by relevance to a query string)
+- **Clustering** (where text strings are grouped by similarity)
+- **Recommendations** (where items with related text strings are recommended)
+- **Anomaly detection** (where outliers with little relatedness are identified)
+- **Diversity measurement** (where similarity distributions are analyzed)
+- **Classification** (where text strings are classified by their most similar label)
 
 ---
 
-## Key Insight
+## Generating Embeddings
 
-We compare vectors instead of words.
+```python
+from sentence_transformers import SentenceTransformer
+
+# 1. Load a pre-trained model (all-MiniLM-L6-v2 is fast and efficient)
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# 2. Define our "documents"
+sentences = [
+    "The cat sits outside", 
+    "A man is playing guitar", 
+    "The feline is resting outdoors"
+]
+
+# 3. Encode the sentences into vectors
+embeddings = model.encode(sentences)
+
+# 4. Check the shape (Dimension of this specific model is 384)
+print(f"Embedding shape: {embeddings.shape}")
+# Result: (3, 384)
+```
 
 ---
 
-## How generated?
+## The Mathematical Distance
 
-Using machine learning models trained on large text data.
+To determine "relevance," we calculate the distance between the query vector ($q$) and document vectors ($d$).
+
+- **Cosine Similarity**: Measures the angle between vectors.
+
+```
+$$\text{sim}(q, d) = \frac{q \cdot d}{\|q\| \|d\|}$$
+```
+
+- **Euclidean Distance ($L2$)**: Measures the straight-line distance.

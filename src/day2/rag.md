@@ -1,34 +1,11 @@
 
 # 10. Retrieval-Augmented Generation
 
-RAG combines retrieval with language models.
+Semantic search is the "Engine" inside the Retrieval-Augmented Generation (RAG) pattern.
 
 ---
 
-## Problem
-
-LLMs:
-- may hallucinate  
-- lack real-time knowledge
-
----
-
-## Solution
-
-1. Retrieve relevant documents  
-2. Pass them to LLM  
-3. Generate answer
-
----
-
-## Flow
-
-Query → Retrieve → Generate
-
----
-
-## Benefit
-
-- grounded answers  
-- more accurate  
-- context-aware
+- **User Query**: "How do I fix a leaky pipe?
+- **Retrieve**: Convert query to vector $\rightarrow$ Find top 3 relevant chunks in the Vector DB.
+- **Augment**: Feed the retrieved text + the original query into an LLM.
+- **Generate**: The LLM provides a grounded, conversational answer.

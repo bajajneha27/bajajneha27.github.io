@@ -1,7 +1,7 @@
 
 # Vector Search
 
-Vector search finds similar items using embeddings.
+When we move from keyword search to semantic search, we stop looking for exact string matches and start looking for the nearest neighbors in a high-dimensional space.
 
 ---
 
