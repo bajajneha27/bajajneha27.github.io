@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-3bd8a7b7.js";
+            window.path_to_searchindex_js = "searchindex-d39b96ea.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-64d7a585.js"></script>
+        <script src="toc-58d53449.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -204,7 +204,7 @@
 <li>Vector Databases (10 min)</li>
 <li>Vector Search (15 min)</li>
 <li>RAG ( Retrieval-Augmented Generation) (10 min)</li>
-<li>Demo: Mini AI Search App ( 5 min)</li>
+<li>Demo ( 5 min)</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="demo-a-simple-search"><a class="header" href="#demo-a-simple-search">Demo: A Simple Search</a></h1>
@@ -407,7 +407,7 @@ cheap → budget</p>
 <li>constant updates</li>
 </ul>
 <hr><div style="break-before: page; page-break-before: always;"></div>
-<h1 id="7-demo-searching-by-meaning"><a class="header" href="#7-demo-searching-by-meaning">7. Demo: Searching by Meaning</a></h1>
+<h1 id="demo"><a class="header" href="#demo">Demo</a></h1>
 <p>Let’s revisit a query:</p>
 <p>“device for presentations”</p>
 <p>Traditional search relies on Lexical Overlap (TF-IDF, BM25). While fast, it suffers from two major flaws:</p>
@@ -420,6 +420,36 @@ cheap → budget</p>
 </li>
 </ul>
 <p>Semantic Search shifts the focus from matching <strong>words</strong> to matching <strong>meaning</strong> (intent and context).</p>
+<pre><code class="language-python">from sentence_transformers import SentenceTransformer, util
+import torch
+
+# 1. Initialize the Open-Source Model
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# 2. Our "Database" (The Corpus)
+catalog = [
+    "Oak wood dining table with 6 chairs",
+    "Memory foam queen mattress with cooling gel",
+    "Ergonomic office chair with lumbar support",
+    "Modern velvet sofa in midnight blue",
+    "Folding metal desk for small spaces"
+]
+
+# 3. Create the Embeddings
+catalog_embeddings = model.encode(catalog, convert_to_tensor=True)
+
+# 4. User Search
+query = "something comfortable to sleep on"
+query_embedding = model.encode(query, convert_to_tensor=True)
+
+# 5. Compute Similarity (using top_k=2)
+# This returns the scores and the index positions of the matches
+hits = util.semantic_search(query_embedding, catalog_embeddings, top_k=2)
+
+print("Search Results:")
+for hit in hits[0]:
+    print(f"- {catalog[hit['corpus_id']]} (Score: {hit['score']:.4f})")
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="8-from-words-to-meaning-embeddings"><a class="header" href="#8-from-words-to-meaning-embeddings">8. From Words to Meaning: Embeddings</a></h1>
 <p>At the heart of AI search is the transformation of unstructured text into high-dimensional numerical vectors.</p>
@@ -501,7 +531,7 @@ print(f"Embedding shape: {embeddings.shape}")
 <h2 id="key-difference"><a class="header" href="#key-difference">Key Difference</a></h2>
 <p>Traditional search → exact lookup<br>Vector search → nearest neighbor search</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="10-retrieval-augmented-generation"><a class="header" href="#10-retrieval-augmented-generation">10. Retrieval-Augmented Generation</a></h1>
+<h1 id="retrieval-augmented-generation"><a class="header" href="#retrieval-augmented-generation">Retrieval-Augmented Generation</a></h1>
 <p>Foundation models have broad knowledge, but can lack depth in specialized domains. This limitation can result in responses that are incomplete or irrelevant. This behavior is known as “hallucination.”</p>
 <p>Retrieval-augmented generation, or RAG, is a technique that uses authoritative, external data to improve the accuracy, relevancy, and usefulness of a model’s output.</p>
 <hr>
