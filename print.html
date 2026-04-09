@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7c7fa63a.js";
+            window.path_to_searchindex_js = "searchindex-83a4ad09.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-47fed0ea.js"></script>
+        <script src="toc-32579dac.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -240,11 +240,11 @@
 <p><code>["introduce", "program", "python"]</code></p>
 <p>Some other transformation techniques that can be considered are:</p>
 <ul>
-<li>Handling punctuations: <code>Python!</code> $\rightarrow$ <code>python</code></li>
-<li>Handling abbreviations: <code>AI</code> $\rightarrow$ <code>Artificial Intelligence</code></li>
-<li>Synonym Expansion: <code>laptop</code> $\rightarrow$ <code>[computer, notebook]</code></li>
-<li>De-compounding: <code>smartphone</code> $\rightarrow$ <code>[smart, phone]</code></li>
-<li>N-grams: <code>python</code> $\rightarrow$ <code>[pyt, yth, tho, hon]</code></li>
+<li>Handling punctuations: <code>Python!</code> –&gt; <code>python</code></li>
+<li>Handling abbreviations: <code>AI</code> –&gt; <code>Artificial Intelligence</code></li>
+<li>Synonym Expansion: <code>laptop</code> –&gt; <code>[computer, notebook]</code></li>
+<li>De-compounding: <code>smartphone</code> –&gt; <code>[smart, phone]</code></li>
+<li>N-grams: <code>python</code> –&gt; <code>[pyt, yth, tho, hon]</code></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="the-inverted-index"><a class="header" href="#the-inverted-index">The Inverted Index</a></h1>
@@ -294,57 +294,61 @@
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="query-processing"><a class="header" href="#query-processing">Query Processing</a></h1>
-<p>Let’s take:</p>
-<p>best wireless mouse for presentations</p>
+<p>When a user hits “Enter” on a search. That’s when the query processing phase starts.</p>
+<p>Let’s process the query:</p>
+<p>“Best books for programming in Python”</p>
 <hr>
-<h2 id="step-1-tokenization"><a class="header" href="#step-1-tokenization">Step 1: Tokenization</a></h2>
-<p>[“best”, “wireless”, “mouse”, “for”, “presentations”]</p>
-<hr>
-<h2 id="step-2-stop-words"><a class="header" href="#step-2-stop-words">Step 2: Stop Words</a></h2>
-<p>Remove common words:</p>
-<p>[“best”, “wireless”, “mouse”, “presentations”]</p>
-<hr>
-<h2 id="step-3-stemming--lemmatization-1"><a class="header" href="#step-3-stemming--lemmatization-1">Step 3: Stemming / Lemmatization</a></h2>
-<p>[“best”, “wireless”, “mouse”, “presentation”]</p>
-<hr>
-<h2 id="step-4-normalization-challenges"><a class="header" href="#step-4-normalization-challenges">Step 4: Normalization Challenges</a></h2>
+<h2 id="the-workflow"><a class="header" href="#the-workflow">The Workflow</a></h2>
 <ul>
-<li>AI vs Artificial Intelligence</li>
-<li>TV vs Television</li>
+<li><strong>Parsing</strong>: Breaking the query string into parts.</li>
+<li><strong>Transformation</strong>: Applying the exact same pipeline (Normalization → Stop-words → Stemming).
+Result : <code>[book, program, python]</code></li>
+<li><strong>Speling Correction</strong>:
+<ul>
+<li>Edit Distance</li>
+<li>K-gram Indexing</li>
 </ul>
-<hr>
-<p>Next: how do we efficiently find documents?</p>
+</li>
+<li><strong>Lookup</strong>: Finding the terms in our Inverted Index.</li>
+<li><strong>Merging/Logic</strong>: Combining results (AND, OR, NOT).</li>
+<li><strong>Ranking</strong>: Sorting the results so the “best” one is at the top.
+<ul>
+<li>Term Frequency (TF)</li>
+<li>Inverse Document Frequency (IDF)</li>
+</ul>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="fuzzy-search--tolerant-retrieval"><a class="header" href="#fuzzy-search--tolerant-retrieval">Fuzzy Search &amp; Tolerant Retrieval</a></h1>
-<p>What happens if the query has a typo?</p>
-<p>Example:</p>
+<p>Fuzzy search is the “forgiveness” layer of a search engine. It ensures that typos, phonetic misspellings, or variations don’t result in an empty “0 results found” page.</p>
+<h2 id="edit-distance-levenshtein-distance"><a class="header" href="#edit-distance-levenshtein-distance">Edit Distance (Levenshtein Distance)</a></h2>
+<p>This algo treats words as strings of characters and calculates the “cost” to transform one into another. The lower the cost, the more likely it’s a match.</p>
 <ul>
-<li>wirless mause</li>
+<li><strong>Insertion</strong>: Add a character (e.g., pyton –&gt; python).</li>
+<li><strong>Deletion</strong>: Remove a character (e.g., pythhon –&gt; python).</li>
+<li><strong>Substitution</strong>: Swap a character (e.g., pythun –&gt; python).</li>
 </ul>
-<hr>
-<h2 id="problem"><a class="header" href="#problem">Problem</a></h2>
-<p>Exact matching fails:</p>
+<h2 id="k-grams-n-grams"><a class="header" href="#k-grams-n-grams">K-grams (N-grams)</a></h2>
+<p>K-grams break words into overlapping chunks of length <code>k</code>.</p>
+<p>If we use 3-grams (trigrams) for the term <code>python</code>, we get:
+<code>#py</code>, <code>pyt</code>, <code>yth</code>, <code>tho</code>, <code>hon</code>, <code>on#</code> (where <code>#</code> marks the start/end).</p>
+<p>Example: User types <code>pythun</code></p>
 <ul>
-<li>“wirless” ≠ “wireless”</li>
+<li><strong>“python” grams</strong>: pyt, yth, tho, hon</li>
+<li><strong>“pythun” grams</strong>: pyt, yth, thu, hun</li>
 </ul>
-<hr>
-<h2 id="solution-fuzzy-matching"><a class="header" href="#solution-fuzzy-matching">Solution: Fuzzy Matching</a></h2>
+<h2 id="other-fuzzy-techniques"><a class="header" href="#other-fuzzy-techniques">Other Fuzzy Techniques</a></h2>
 <ul>
-<li>Edit distance</li>
-<li>k-gram indexing</li>
-<li>phonetic matching</li>
-<li>dictionary-based correction</li>
+<li><strong>Phonetic Algorithms</strong>: (e.g., Soundex or Metaphone) Matching words that sound the same but are spelled differently, like “Smith” and “Smyth.”</li>
+<li><strong>Transposition</strong>: Specifically handling when two letters are swapped (e.g., <code>pythno</code> –&gt; <code>python</code>), which is a very common human typo.</li>
+<li><strong>SymSpell</strong>: A very fast algorithm that uses pre-calculated deletions to find matches in milliseconds.</li>
 </ul>
-<hr>
-<h2 id="wildcard-queries"><a class="header" href="#wildcard-queries">Wildcard Queries</a></h2>
-<p>Example:
-mous*</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="limits-of-keyword-search"><a class="header" href="#limits-of-keyword-search">Limits of Keyword Search</a></h1>
 <p>Example:
 device for presentations</p>
 <hr>
-<h2 id="problem-1"><a class="header" href="#problem-1">Problem</a></h2>
+<h2 id="problem"><a class="header" href="#problem">Problem</a></h2>
 <p>No keyword overlap.</p>
 <hr>
 <h2 id="synonyms"><a class="header" href="#synonyms">Synonyms</a></h2>

@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7c7fa63a.js";
+            window.path_to_searchindex_js = "../searchindex-83a4ad09.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-47fed0ea.js"></script>
+        <script src="../toc-32579dac.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -175,26 +175,30 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="query-processing"><a class="header" href="#query-processing">Query Processing</a></h1>
-<p>Let’s take:</p>
-<p>best wireless mouse for presentations</p>
+<p>When a user hits “Enter” on a search. That’s when the query processing phase starts.</p>
+<p>Let’s process the query:</p>
+<p>“Best books for programming in Python”</p>
 <hr>
-<h2 id="step-1-tokenization"><a class="header" href="#step-1-tokenization">Step 1: Tokenization</a></h2>
-<p>[“best”, “wireless”, “mouse”, “for”, “presentations”]</p>
-<hr>
-<h2 id="step-2-stop-words"><a class="header" href="#step-2-stop-words">Step 2: Stop Words</a></h2>
-<p>Remove common words:</p>
-<p>[“best”, “wireless”, “mouse”, “presentations”]</p>
-<hr>
-<h2 id="step-3-stemming--lemmatization"><a class="header" href="#step-3-stemming--lemmatization">Step 3: Stemming / Lemmatization</a></h2>
-<p>[“best”, “wireless”, “mouse”, “presentation”]</p>
-<hr>
-<h2 id="step-4-normalization-challenges"><a class="header" href="#step-4-normalization-challenges">Step 4: Normalization Challenges</a></h2>
+<h2 id="the-workflow"><a class="header" href="#the-workflow">The Workflow</a></h2>
 <ul>
-<li>AI vs Artificial Intelligence</li>
-<li>TV vs Television</li>
+<li><strong>Parsing</strong>: Breaking the query string into parts.</li>
+<li><strong>Transformation</strong>: Applying the exact same pipeline (Normalization → Stop-words → Stemming).
+Result : <code>[book, program, python]</code></li>
+<li><strong>Speling Correction</strong>:
+<ul>
+<li>Edit Distance</li>
+<li>K-gram Indexing</li>
 </ul>
-<hr>
-<p>Next: how do we efficiently find documents?</p>
+</li>
+<li><strong>Lookup</strong>: Finding the terms in our Inverted Index.</li>
+<li><strong>Merging/Logic</strong>: Combining results (AND, OR, NOT).</li>
+<li><strong>Ranking</strong>: Sorting the results so the “best” one is at the top.
+<ul>
+<li>Term Frequency (TF)</li>
+<li>Inverse Document Frequency (IDF)</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
