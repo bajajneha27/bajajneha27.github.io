@@ -8,7 +8,7 @@ Retrieval-augmented generation, or RAG, is a technique that uses authoritative, 
 ---
 
 - **User Query**: "How do I fix a leaky pipe?
-- **Retrieve**: Convert query to vector $\rightarrow$ Find top 3 relevant chunks in the Vector DB.
+- **Retrieve**: Convert query to vector \\(\rightarrow\\) Find top 3 relevant chunks in the Vector DB.
 - **Augment**: Feed the retrieved text + the original query into an LLM.
 - **Generate**: The LLM provides a grounded, conversational answer.
 

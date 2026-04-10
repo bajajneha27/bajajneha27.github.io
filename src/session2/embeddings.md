@@ -45,12 +45,11 @@ print(f"Embedding shape: {embeddings.shape}")
 
 ## The Mathematical Distance
 
-To determine "relevance," we calculate the distance between the query vector (\\[q\\]) and document vectors ($d$).
+To determine "relevance," we calculate the distance between the query vector (\\(q\\)) and document vectors (\\(d\\)).
 
 - **Cosine Similarity**: Measures the angle between vectors.
 
-```
-$$\text{sim}(q, d) = \frac{q \cdot d}{\|q\| \|d\|}$$
-```
+\\(\text{sim}(q, d) = \frac{q \cdot d}{\|q\| \|d\|}\\)
 
-- **Euclidean Distance ($L2$)**: Measures the straight-line distance.
+
+- **Euclidean Distance (\\(L2\\))**: Measures the straight-line distance.
