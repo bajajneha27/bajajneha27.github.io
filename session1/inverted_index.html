@@ -37,7 +37,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-962c37fc.js";
+            window.path_to_searchindex_js = "../searchindex-42c5f4be.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-0d3cce82.js"></script>
@@ -212,7 +212,7 @@
 </ul>
 <h3 id="data-structures-for-dictionary"><a class="header" href="#data-structures-for-dictionary">Data Structures for Dictionary:</a></h3>
 <ul>
-<li><strong>Hash Tables</strong>: Provide $O(1)$ lookup time. Great for exact matches, but they don’t support “starts with” or range searches.</li>
+<li><strong>Hash Tables</strong>: Provide \(O(1)\) lookup time. Great for exact matches, but they don’t support “starts with” or range searches.</li>
 <li><strong>B Trees</strong>: Most common in production databases (like PostgreSQL). They keep terms sorted, which is essential for searching for things like comput* to find both “computer” and “computing.”</li>
 <li><strong>Tries (Prefix Trees)</strong>: Extremely efficient for storing overlapping prefixes (like apple, apply, applied).</li>
 </ul>
