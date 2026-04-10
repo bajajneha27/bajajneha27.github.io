@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction: Beyond Keywords - Search to RAG Workshop</title>
+        <title>The Inverted Index - Search to RAG Workshop</title>
 
 
         <!-- Custom HTML head -->
@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7dd0a5f2.js";
+            window.path_to_searchindex_js = "../searchindex-538d2ce6.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-dbb139f1.js"></script>
+        <script src="../toc-34d6b6a5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -174,25 +174,61 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="introduction-to-semantic-search"><a class="header" href="#introduction-to-semantic-search">Introduction to Semantic Search</a></h1>
-<p>Traditional search is like looking through a phone book; if you don’t have the exact spelling, you’re stuck. Semantic search is more like talking to a librarian who understands that when you ask for “something about giant reptiles,” you’re probably looking for books on dinosaurs. 🦖</p>
-<h2 id="the-semantic-search-flow"><a class="header" href="#the-semantic-search-flow">The Semantic Search Flow</a></h2>
-<ol>
-<li><strong>Crawling &amp; Ingestion</strong>: The system gathers data (text, images, or video) from various sources.</li>
-<li><strong>Vector Encoding (The Transformer Phase)</strong>: Instead of just making a list of words, a Transformer model (like BERT) reads the content and converts it into a Dense Vector (a long list of numbers). This vector represents the meaning of the document in a high-dimensional space.</li>
-<li><strong>Vector Indexing</strong>: These vectors are stored in a specialized Vector Database (like Pinecone, Milvus, or Weaviate). The database organizes them so that “similar meanings” are physically close to each other.</li>
-<li><strong>Semantic Querying</strong>: When you search, your query is also converted into a vector using the same Transformer. The system then looks for the “nearest neighbors” in the vector space—finding documents that are mathematically closest to your intent.</li>
-</ol>
+                        <h1 id="the-inverted-index"><a class="header" href="#the-inverted-index">The Inverted Index</a></h1>
+<p>Documents collection:</p>
+<ul>
+<li>Doc1: “Introduction to Programming with Python”</li>
+<li>Doc2: “Advanced Programmers Handbook”</li>
+<li>Doc3: “The History of Computer Programs”</li>
+<li>Doc4: “A Guide to Gardening in the Spring”</li>
+</ul>
+<h3 id="mapping-terms-to-documents"><a class="header" href="#mapping-terms-to-documents">Mapping Terms to Documents</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Term</th><th>Documents</th></tr>
+</thead>
+<tbody>
+<tr><td><code>introduc</code></td><td>1</td></tr>
+<tr><td><code>program</code></td><td>1, 2, 3</td></tr>
+<tr><td><code>python</code></td><td>1</td></tr>
+<tr><td><code>advanc</code></td><td>2</td></tr>
+<tr><td><code>handbook</code></td><td>2</td></tr>
+<tr><td><code>histori</code></td><td>3</td></tr>
+<tr><td><code>comput</code></td><td>3</td></tr>
+<tr><td><code>garden</code></td><td>4</td></tr>
+<tr><td><code>spring</code></td><td>4</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="core-concepts"><a class="header" href="#core-concepts">Core Concepts</a></h3>
+<p>An inverted index is made of two main parts:</p>
+<ul>
+<li><strong>The Dictionary</strong>: A list of all unique terms (stems) in the collection.</li>
+<li><strong>The Postings List</strong>: The actual lists of document IDs associated with those terms.</li>
+</ul>
+<h3 id="data-structures-for-dictionary"><a class="header" href="#data-structures-for-dictionary">Data Structures for Dictionary:</a></h3>
+<ul>
+<li><strong>Hash Tables</strong>: Provide $O(1)$ lookup time. Great for exact matches, but they don’t support “starts with” or range searches.</li>
+<li><strong>B Trees</strong>: Most common in production databases (like PostgreSQL). They keep terms sorted, which is essential for searching for things like comput* to find both “computer” and “computing.”</li>
+<li><strong>Tries (Prefix Trees)</strong>: Extremely efficient for storing overlapping prefixes (like apple, apply, applied).</li>
+</ul>
+<h3 id="storing-the-postings-the-postings-list"><a class="header" href="#storing-the-postings-the-postings-list">Storing the Postings (The “Postings List”)</a></h3>
+<ul>
+<li><strong>Linked Lists vs. Arrays</strong>: We usually use Variable-length Arrays. They are more cache-friendly than linked lists and allow for faster “jumping” during intersection math.</li>
+<li><strong>Compression (Delta Encoding)</strong>: Instead of storing IDs like [102, 105, 110], we store the gaps: [102, 3, 5]. Smaller numbers take up fewer bits, significantly reducing the index size on disk.</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../day1/scale.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../session1/indexing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../day2/embeddings.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../session1/searching.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -202,11 +238,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../day1/scale.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../session1/indexing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../day2/embeddings.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../session1/searching.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

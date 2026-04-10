@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction to Search Engine - Search to RAG Workshop</title>
+        <title>Retrieval-Augmented Generation - Search to RAG Workshop</title>
 
 
         <!-- Custom HTML head -->
@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7dd0a5f2.js";
+            window.path_to_searchindex_js = "../searchindex-538d2ce6.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-dbb139f1.js"></script>
+        <script src="../toc-34d6b6a5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -174,34 +174,27 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="introduction-to-search-engine"><a class="header" href="#introduction-to-search-engine">Introduction to Search Engine</a></h1>
-<p>Three key things for Search:</p>
-<ol>
-<li>Dataset collection ( Crawling )</li>
-<li>Pre-processing ( Indexing )</li>
-<li>Execution ( Querying )</li>
-</ol>
-<h2 id="crawling"><a class="header" href="#crawling">Crawling</a></h2>
-<p>Crawling is the discovery phase. A “crawler” is a script that systematically browses the web (or a local filesystem) to find content.</p>
+                        <h1 id="retrieval-augmented-generation"><a class="header" href="#retrieval-augmented-generation">Retrieval-Augmented Generation</a></h1>
+<p>Foundation models have broad knowledge, but can lack depth in specialized domains. This limitation can result in responses that are incomplete or irrelevant. This behavior is known as “hallucination.”</p>
+<p>Retrieval-augmented generation, or RAG, is a technique that uses authoritative, external data to improve the accuracy, relevancy, and usefulness of a model’s output.</p>
+<hr>
 <ul>
-<li>Web for search engines</li>
-<li>Catalog for e-commerce websites</li>
-<li>Books for library</li>
+<li><strong>User Query</strong>: “How do I fix a leaky pipe?</li>
+<li><strong>Retrieve</strong>: Convert query to vector $\rightarrow$ Find top 3 relevant chunks in the Vector DB.</li>
+<li><strong>Augment</strong>: Feed the retrieved text + the original query into an LLM.</li>
+<li><strong>Generate</strong>: The LLM provides a grounded, conversational answer.</li>
 </ul>
-<h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
-<p>Indexing is a pre-processing step before a user could ever search anything. Since the number of documents can be huge in billions, real time search will take a lot of time. So, we need to pre-process those documents so that search results happen in milliseconds.</p>
-<h2 id="querying"><a class="header" href="#querying">Querying</a></h2>
-<p>This happens in real-time when a user types a search. The system takes the user’s input, does some cleaning and then looks up the results in the map we built during indexing to find the best matches.</p>
+<p><img src="rag.png" alt="alt text"></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../session2/vector_databases.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../day1/indexing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../session2/modern.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -211,11 +204,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../session2/vector_databases.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../day1/indexing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../session2/modern.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
