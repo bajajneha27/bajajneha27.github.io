@@ -38,7 +38,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-262a46b3.js";
+            window.path_to_searchindex_js = "searchindex-5e4523d6.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-0d3cce82.js"></script>
@@ -302,22 +302,36 @@
 <hr>
 <h2 id="the-workflow"><a class="header" href="#the-workflow">The Workflow</a></h2>
 <ul>
-<li><strong>Parsing</strong>: Breaking the query string into parts.</li>
-<li><strong>Transformation</strong>: Applying the exact same pipeline (Normalization → Stop-words → Stemming).
-Result : <code>[book, program, python]</code></li>
-<li><strong>Speling Correction</strong>:
+<li>
+<p><strong>Parsing</strong>: Breaking the query string into parts.</p>
+</li>
+<li>
+<p><strong>Transformation</strong>: Applying the exact same pipeline (Normalization → Stop-words → Stemming).
+Result : <code>[book, program, python]</code></p>
+</li>
+<li>
+<p><strong>Speling Correction</strong>:</p>
 <ul>
 <li>Edit Distance</li>
 <li>K-gram Indexing</li>
 </ul>
 </li>
-<li><strong>Lookup</strong>: Finding the terms in our Inverted Index.</li>
-<li><strong>Merging/Logic</strong>: Combining results (AND, OR, NOT).</li>
-<li><strong>Ranking</strong>: Sorting the results so the “best” one is at the top.
+<li>
+<p><strong>Lookup</strong>: Finding the terms in our Inverted Index.</p>
+</li>
+<li>
+<p><strong>Merging/Logic</strong>: Combining results (AND, OR, NOT).</p>
+</li>
+<li>
+<p><strong>Ranking</strong>: Sorting the results so the “best” one is at the top.</p>
 <ul>
-<li>Term Frequency (TF)</li>
-<li>Inverse Document Frequency (IDF)</li>
+<li><strong>Term Frequency (TF)</strong>:</li>
 </ul>
+<p>\(TF(t, d) = \frac{\text{Number of times term } t \text{ appears in document } d}{\text{Total number of terms in document } d}\)</p>
+<ul>
+<li><strong>Inverse Document Frequency (IDF)</strong>:</li>
+</ul>
+<p>\(IDF(t, D) = \log\left(\frac{\text{Total number of documents } N}{\text{Number of documents containing term } t}\right)\)</p>
 </li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
@@ -414,7 +428,9 @@ print(f"Embedding shape: {embeddings.shape}")
 <ul>
 <li><strong>Cosine Similarity</strong>: Measures the angle between vectors.</li>
 </ul>
-<p>\(\text{sim}(q, d) = \frac{q \cdot d}{|q| |d|}\)</p>
+<center>
+\\(\text{sim}(q, d) = \frac{q \cdot d}{\|q\| \|d\|}\\)
+</center>
 <ul>
 <li><strong>Euclidean Distance (\(L2\))</strong>: Measures the straight-line distance.</li>
 </ul>
