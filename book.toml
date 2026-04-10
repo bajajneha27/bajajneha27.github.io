@@ -8,4 +8,6 @@ command = "mdbook-mermaid"
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "navy"
-mathjax-support = true
+
+[output.html.mathjax]
+enable = true
