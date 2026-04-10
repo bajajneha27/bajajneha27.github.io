@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction to Search Engine - Search to RAG Workshop</title>
+        <title>Transformer - Search to RAG Workshop</title>
 
 
         <!-- Custom HTML head -->
@@ -176,34 +176,27 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="introduction-to-search-engine"><a class="header" href="#introduction-to-search-engine">Introduction to Search Engine</a></h1>
-<p>Three key things for Search:</p>
-<ol>
-<li>Dataset collection ( Crawling )</li>
-<li>Pre-processing ( Indexing )</li>
-<li>Execution ( Querying )</li>
-</ol>
-<h2 id="crawling"><a class="header" href="#crawling">Crawling</a></h2>
-<p>Crawling is the discovery phase. A “crawler” is a script that systematically browses the web (or a local filesystem) to find content.</p>
+                        <h1 id="transformer"><a class="header" href="#transformer">Transformer</a></h1>
+<p>A Transformer is a type of deep learning architecture. Before Transformers, models read text like a person—one word at a time from left to right. The Transformer changed this by using a mechanism called <em>Self-Attention</em>, which allows it to look at every word in a sentence simultaneously to understand the relationships between them.</p>
+<h3 id="functional-blocks"><a class="header" href="#functional-blocks">Functional Blocks</a></h3>
 <ul>
-<li>Web for search engines</li>
-<li>Catalog for e-commerce websites</li>
-<li>Books for library</li>
+<li>
+<p><strong>Encoder</strong>: This part of the model is responsible for “understanding” the input. It takes a sentence and converts it into Dense Vector or Embedding.</p>
+</li>
+<li>
+<p><strong>Decoder</strong>: This part takes the abstract meaning created by the encoder and uses it to generate new text, one word at a time. It’s what allows AI to “talk” back to you.</p>
+</li>
 </ul>
-<h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
-<p>Indexing is a pre-processing step before a user could ever search anything. Since the number of documents can be huge in billions, real time search will take a lot of time. So, we need to pre-process those documents so that search results happen in milliseconds.</p>
-<h2 id="querying"><a class="header" href="#querying">Querying</a></h2>
-<p>This happens in real-time when a user types a search. The system takes the user’s input, does some cleaning and then looks up the results in the map we built during indexing to find the best matches.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../session2/introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../session1/indexing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../session2/embeddings.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -213,11 +206,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../session2/introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../session1/indexing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../session2/embeddings.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

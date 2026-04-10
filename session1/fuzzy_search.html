@@ -37,10 +37,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-5e4523d6.js";
+            window.path_to_searchindex_js = "../searchindex-e9f38ee6.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-0d3cce82.js"></script>
+        <script src="../toc-e277a0bb.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -181,9 +181,9 @@
 <h2 id="edit-distance-levenshtein-distance"><a class="header" href="#edit-distance-levenshtein-distance">Edit Distance (Levenshtein Distance)</a></h2>
 <p>This algo treats words as strings of characters and calculates the “cost” to transform one into another. The lower the cost, the more likely it’s a match.</p>
 <ul>
-<li><strong>Insertion</strong>: Add a character (e.g., pyton –&gt; python).</li>
-<li><strong>Deletion</strong>: Remove a character (e.g., pythhon –&gt; python).</li>
-<li><strong>Substitution</strong>: Swap a character (e.g., pythun –&gt; python).</li>
+<li><strong>Insertion</strong>: Add a character (e.g., <code>pyton</code> \(\rightarrow\) <code>python</code>).</li>
+<li><strong>Deletion</strong>: Remove a character (e.g., <code>pythhon</code> \(\rightarrow\) <code>python</code>).</li>
+<li><strong>Substitution</strong>: Swap a character (e.g., <code>pythun</code> \(\rightarrow\) <code>python</code>).</li>
 </ul>
 <h2 id="k-grams-n-grams"><a class="header" href="#k-grams-n-grams">K-grams (N-grams)</a></h2>
 <p>K-grams break words into overlapping chunks of length <code>k</code>.</p>
@@ -191,8 +191,8 @@
 <code>#py</code>, <code>pyt</code>, <code>yth</code>, <code>tho</code>, <code>hon</code>, <code>on#</code> (where <code>#</code> marks the start/end).</p>
 <p>Example: User types <code>pythun</code></p>
 <ul>
-<li><strong>“python” grams</strong>: pyt, yth, tho, hon</li>
-<li><strong>“pythun” grams</strong>: pyt, yth, thu, hun</li>
+<li><strong>“python” grams</strong>: <code>pyt</code>, <code>yth</code>, <code>tho</code>, <code>hon</code></li>
+<li><strong>“pythun” grams</strong>: <code>pyt</code>, <code>yth</code>, <code>thu</code>, <code>hun</code></li>
 </ul>
 <h2 id="other-fuzzy-techniques"><a class="header" href="#other-fuzzy-techniques">Other Fuzzy Techniques</a></h2>
 <ul>

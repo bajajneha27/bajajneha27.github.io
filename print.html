@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-5e4523d6.js";
+            window.path_to_searchindex_js = "searchindex-e9f38ee6.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-0d3cce82.js"></script>
+        <script src="toc-e277a0bb.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -189,20 +189,21 @@
 </ul>
 <hr>
 <h3 id="agenda"><a class="header" href="#agenda">Agenda</a></h3>
-<h4 id="session-1--foundations-of-search-6070-min"><a class="header" href="#session-1--foundations-of-search-6070-min">Session 1 — Foundations of Search (60–70 min)</a></h4>
+<h4 id="session-1--foundations-of-search-50-min"><a class="header" href="#session-1--foundations-of-search-50-min">Session 1 — Foundations of Search (50 min)</a></h4>
 <ul>
 <li>Introduction to Search Engine (5 min)</li>
 <li>Indexing (5 min)</li>
-<li>Inverted Index (15 min)</li>
+<li>Inverted Index (10 min)</li>
 <li>Query Processing ( 10 min)</li>
-<li>Fuzzy Search (5 min)</li>
+<li>Fuzzy Search (10 min)</li>
 <li>Limits of Traditional Search (5 min)</li>
-<li>Search at Scale (10 min)</li>
+<li>Search at Scale (5 min)</li>
 </ul>
-<h4 id="session-2--modern-search-with-ai-6070-min"><a class="header" href="#session-2--modern-search-with-ai-6070-min">Session 2 — Modern Search with AI (60–70 min)</a></h4>
+<h4 id="session-2--modern-search-with-ai-50-min"><a class="header" href="#session-2--modern-search-with-ai-50-min">Session 2 — Modern Search with AI (50 min)</a></h4>
 <ul>
 <li>Introduction: Beyond Keywords (5 min)</li>
-<li>Embeddings (15 min)</li>
+<li>Transformer (5 min)</li>
+<li>Embeddings (10 min)</li>
 <li>Vector Databases (10 min)</li>
 <li>RAG ( Retrieval-Augmented Generation) (10 min)</li>
 <li>Demo ( 5 min)</li>
@@ -340,9 +341,9 @@ Result : <code>[book, program, python]</code></p>
 <h2 id="edit-distance-levenshtein-distance"><a class="header" href="#edit-distance-levenshtein-distance">Edit Distance (Levenshtein Distance)</a></h2>
 <p>This algo treats words as strings of characters and calculates the “cost” to transform one into another. The lower the cost, the more likely it’s a match.</p>
 <ul>
-<li><strong>Insertion</strong>: Add a character (e.g., pyton –&gt; python).</li>
-<li><strong>Deletion</strong>: Remove a character (e.g., pythhon –&gt; python).</li>
-<li><strong>Substitution</strong>: Swap a character (e.g., pythun –&gt; python).</li>
+<li><strong>Insertion</strong>: Add a character (e.g., <code>pyton</code> \(\rightarrow\) <code>python</code>).</li>
+<li><strong>Deletion</strong>: Remove a character (e.g., <code>pythhon</code> \(\rightarrow\) <code>python</code>).</li>
+<li><strong>Substitution</strong>: Swap a character (e.g., <code>pythun</code> \(\rightarrow\) <code>python</code>).</li>
 </ul>
 <h2 id="k-grams-n-grams"><a class="header" href="#k-grams-n-grams">K-grams (N-grams)</a></h2>
 <p>K-grams break words into overlapping chunks of length <code>k</code>.</p>
@@ -350,8 +351,8 @@ Result : <code>[book, program, python]</code></p>
 <code>#py</code>, <code>pyt</code>, <code>yth</code>, <code>tho</code>, <code>hon</code>, <code>on#</code> (where <code>#</code> marks the start/end).</p>
 <p>Example: User types <code>pythun</code></p>
 <ul>
-<li><strong>“python” grams</strong>: pyt, yth, tho, hon</li>
-<li><strong>“pythun” grams</strong>: pyt, yth, thu, hun</li>
+<li><strong>“python” grams</strong>: <code>pyt</code>, <code>yth</code>, <code>tho</code>, <code>hon</code></li>
+<li><strong>“pythun” grams</strong>: <code>pyt</code>, <code>yth</code>, <code>thu</code>, <code>hun</code></li>
 </ul>
 <h2 id="other-fuzzy-techniques"><a class="header" href="#other-fuzzy-techniques">Other Fuzzy Techniques</a></h2>
 <ul>
@@ -387,6 +388,18 @@ Result : <code>[book, program, python]</code></p>
 <li><strong>Vector Indexing</strong>: These vectors are stored in a specialized Vector Database (like Pinecone, Milvus, or Weaviate). The database organizes them so that “similar meanings” are physically close to each other.</li>
 <li><strong>Semantic Querying</strong>: When you search, your query is also converted into a vector using the same Transformer. The system then looks for the “nearest neighbors” in the vector space—finding documents that are mathematically closest to your intent.</li>
 </ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="transformer"><a class="header" href="#transformer">Transformer</a></h1>
+<p>A Transformer is a type of deep learning architecture. Before Transformers, models read text like a person—one word at a time from left to right. The Transformer changed this by using a mechanism called <em>Self-Attention</em>, which allows it to look at every word in a sentence simultaneously to understand the relationships between them.</p>
+<h3 id="functional-blocks"><a class="header" href="#functional-blocks">Functional Blocks</a></h3>
+<ul>
+<li>
+<p><strong>Encoder</strong>: This part of the model is responsible for “understanding” the input. It takes a sentence and converts it into Dense Vector or Embedding.</p>
+</li>
+<li>
+<p><strong>Decoder</strong>: This part takes the abstract meaning created by the encoder and uses it to generate new text, one word at a time. It’s what allows AI to “talk” back to you.</p>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="words-to-meaning-embeddings"><a class="header" href="#words-to-meaning-embeddings">Words to Meaning: Embeddings</a></h1>
 <p>At the heart of AI search is the transformation of unstructured text into high-dimensional numerical vectors.</p>
@@ -428,9 +441,7 @@ print(f"Embedding shape: {embeddings.shape}")
 <ul>
 <li><strong>Cosine Similarity</strong>: Measures the angle between vectors.</li>
 </ul>
-<center>
-\\(\text{sim}(q, d) = \frac{q \cdot d}{\|q\| \|d\|}\\)
-</center>
+<p>\(\text{sim}(q, d) = \frac{q \cdot d}{|q| |d|}\)</p>
 <ul>
 <li><strong>Euclidean Distance (\(L2\))</strong>: Measures the straight-line distance.</li>
 </ul>
