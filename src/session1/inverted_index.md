@@ -32,7 +32,7 @@ An inverted index is made of two main parts:
 
 ### Data Structures for Dictionary:
 
-- **Hash Tables**: Provide $O(1)$ lookup time. Great for exact matches, but they don't support "starts with" or range searches.
+- **Hash Tables**: Provide \\(O(1)\\) lookup time. Great for exact matches, but they don't support "starts with" or range searches.
 - **B Trees**: Most common in production databases (like PostgreSQL). They keep terms sorted, which is essential for searching for things like comput* to find both "computer" and "computing."
 - **Tries (Prefix Trees)**: Extremely efficient for storing overlapping prefixes (like apple, apply, applied).
 

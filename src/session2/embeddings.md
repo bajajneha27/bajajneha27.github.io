@@ -45,7 +45,7 @@ print(f"Embedding shape: {embeddings.shape}")
 
 ## The Mathematical Distance
 
-To determine "relevance," we calculate the distance between the query vector ($q$) and document vectors ($d$).
+To determine "relevance," we calculate the distance between the query vector (\\[q\\]) and document vectors ($d$).
 
 - **Cosine Similarity**: Measures the angle between vectors.
 
