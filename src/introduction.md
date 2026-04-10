@@ -16,7 +16,7 @@ This workshop explores how search systems work, from traditional keyword-based a
 
 ### Agenda
 
-#### Day 1 — Foundations of Search (60–70 min)
+#### Session 1 — Foundations of Search (60–70 min)
 
 - Introduction to Search Engine (5 min)
 - Indexing (5 min)
@@ -26,7 +26,7 @@ This workshop explores how search systems work, from traditional keyword-based a
 - Limits of Traditional Search (5 min)
 - Search at Scale (10 min)
 
-#### Day 2 — Modern Search with AI (60–70 min)
+#### Session 2 — Modern Search with AI (60–70 min)
 
 - Introduction: Beyond Keywords (5 min)
 - Embeddings (15 min)
