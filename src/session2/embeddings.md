@@ -49,8 +49,6 @@ To determine "relevance," we calculate the distance between the query vector (\\
 
 - **Cosine Similarity**: Measures the angle between vectors.
 
-<center>
 \\(\text{sim}(q, d) = \frac{q \cdot d}{\|q\| \|d\|}\\)
-</center>
 
 - **Euclidean Distance (\\(L2\\))**: Measures the straight-line distance.

@@ -7,9 +7,9 @@ Fuzzy search is the "forgiveness" layer of a search engine. It ensures that typo
 
 This algo treats words as strings of characters and calculates the "cost" to transform one into another. The lower the cost, the more likely it's a match.
 
-- **Insertion**: Add a character (e.g., pyton --> python).
-- **Deletion**: Remove a character (e.g., pythhon --> python).
-- **Substitution**: Swap a character (e.g., pythun --> python).
+- **Insertion**: Add a character (e.g., `pyton` \\(\rightarrow\\) `python`).
+- **Deletion**: Remove a character (e.g., `pythhon` \\(\rightarrow\\) `python`).
+- **Substitution**: Swap a character (e.g., `pythun` \\(\rightarrow\\) `python`).
 
 ## K-grams (N-grams)
 
@@ -20,8 +20,8 @@ If we use 3-grams (trigrams) for the term `python`, we get:
 
 Example: User types `pythun`
 
-- **"python" grams**: pyt, yth, tho, hon
-- **"pythun" grams**: pyt, yth, thu, hun
+- **"python" grams**: `pyt`, `yth`, `tho`, `hon`
+- **"pythun" grams**: `pyt`, `yth`, `thu`, `hun`
 
 ## Other Fuzzy Techniques
 

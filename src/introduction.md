@@ -16,20 +16,21 @@ This workshop explores how search systems work, from traditional keyword-based a
 
 ### Agenda
 
-#### Session 1 — Foundations of Search (60–70 min)
+#### Session 1 — Foundations of Search (50 min)
 
 - Introduction to Search Engine (5 min)
 - Indexing (5 min)
-- Inverted Index (15 min)
+- Inverted Index (10 min)
 - Query Processing ( 10 min)
-- Fuzzy Search (5 min)
+- Fuzzy Search (10 min)
 - Limits of Traditional Search (5 min)
-- Search at Scale (10 min)
+- Search at Scale (5 min)
 
-#### Session 2 — Modern Search with AI (60–70 min)
+#### Session 2 — Modern Search with AI (50 min)
 
 - Introduction: Beyond Keywords (5 min)
-- Embeddings (15 min)
+- Transformer (5 min)
+- Embeddings (10 min)
 - Vector Databases (10 min)
 - RAG ( Retrieval-Augmented Generation) (10 min)
 - Demo ( 5 min)
